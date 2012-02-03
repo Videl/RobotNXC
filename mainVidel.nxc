@@ -29,7 +29,7 @@ sub discovery() // Discovering the surroundings
 sub writeText(string sentence, int line, int column)
 {
     TextOut(line, 0, "                 ");
-    TextOut(line, column, sentence);
+    TextOut(60-line, column, sentence);
     return;
 }
 
@@ -38,7 +38,7 @@ task main()
      int keyHighestDistance = 0, highestDistance=1;
      ClearScreen();
      //TextOut(0, 60,"How's life doin'?");
-     writeText("How's life doing", 0, 60);
+     writeText("How's life doing", 0, 0);
 
      int angle = 0;
      SetSensorLowspeed(IN_4);
