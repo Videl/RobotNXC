@@ -57,10 +57,10 @@ task main()
              {
                             highestDistance = distance[i];
                             keyHighestDistance = i;
-                            writeText("Choosed distance !", 0,1);
-                            writeNum(keyHighestDistance, 1, 2);
-                            writeNum(highestDistance, 1, 6);
              }
+             writeText("Choosed distance !", 0,1);
+             writeNum(keyHighestDistance, 1, 2);
+             writeNum(highestDistance, 1, 6);
      }
      
 
