@@ -4,7 +4,7 @@
 // Servomotor A C
 int distance[];
 
-sub< discovery() // Discovering the surroundings
+sub discovery() // Discovering the surroundings
 {
      OnRev(OUT_A, speed); Wait(1000);Off(OUT_A);
      OnFwd(OUT_C, speed); Wait(1000);Off(OUT_C);
@@ -20,15 +20,15 @@ sub< discovery() // Discovering the surroundings
              OnRev(OUT_A, speed); Wait(500);Off(OUT_A);
              Wait(2000);
      }
-                         return ;
 
+      return ;
 }
 
 
 task main()
 {
      ClearScreen();
-     TextOut(0, 60,"How's life doin' ?");
+     TextOut(0, 60,"How's life doin'?");
 
      int angle = 0;
      SetSensorLowspeed(IN_4);
