@@ -62,6 +62,9 @@ task main()
              writeNum(keyHighestDistance, 1, 2);
              writeNum(highestDistance, 1, 6);
      }
+     //Max Distance and key of the direction
+             //hello
+     
      
 
 }
