@@ -1,5 +1,7 @@
 #define speed 30
 #define step 50
+#define discoveryTurn 20
+
 // Ultrasonic IN_4
 // Servomotor A C
 int distance[];
@@ -11,7 +13,7 @@ sub discovery() // Discovering the surroundings
 
      Wait(2000);
 
-     for(int i=0;i<20;i++)
+     for(int i=0;i<discoveryTurn;i++)
      {
              distance[i] = SensorUS(IN_4);
             // TextOut(0, 30, "status:        ");
@@ -24,18 +26,38 @@ sub discovery() // Discovering the surroundings
       return ;
 }
 
+sub writeText(string sentence, int line, int column)
+{
+    TextOut(line, 0, "                 ");
+    TextOut(line, column, sentence);
+    return;
+}
 
 task main()
 {
+     int keyHighestDistance = 0, highestDistance=1;
      ClearScreen();
-     TextOut(0, 60,"How's life doin'?");
+     //TextOut(0, 60,"How's life doin'?");
+     writeText("How's life doing", 0, 60);
 
      int angle = 0;
      SetSensorLowspeed(IN_4);
      discovery();
      
+     for(int i=0; i<discoveryTurn; i++)
+     {
+             if(distance[i] > highestDistance)
+             {
+                            highestDistance = distance[i];
+                            keyHighestDistance = i;
+                            
+             }
+     }
+     
 
 }
+
+
 
 /*
 TextOut(0, 30, "status:        ");
