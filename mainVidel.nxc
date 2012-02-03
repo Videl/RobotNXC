@@ -33,6 +33,13 @@ sub writeText(string sentence, int line, int column)
     return;
 }
 
+sub writeNum(int number, int line, int column)
+{
+    TextOut(line, 0, "                 ");
+    NumOut(60-line, column, number);
+    return;
+}
+
 task main()
 {
      int keyHighestDistance = 0, highestDistance=1;
@@ -50,7 +57,9 @@ task main()
              {
                             highestDistance = distance[i];
                             keyHighestDistance = i;
-                            
+                            writeText("Choosed distance !", 0,1);
+                            writeNum(keyHighestDistance, 1, 2);
+                            writeNum(highestDistance, 1, 6);
              }
      }
      
