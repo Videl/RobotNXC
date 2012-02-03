@@ -1,0 +1,43 @@
+#define speed 30
+#define step 50
+// Ultrasonic IN_4
+// Servomotor A C
+int distance[];
+
+sub< discovery() // Discovering the surroundings
+{
+     OnRev(OUT_A, speed); Wait(1000);Off(OUT_A);
+     OnFwd(OUT_C, speed); Wait(1000);Off(OUT_C);
+
+     Wait(2000);
+
+     for(int i=0;i<20;i++)
+     {
+             distance[i] = SensorUS(IN_4);
+            // TextOut(0, 30, "status:        ");
+             TextOut(0, 55, "           ");
+             NumOut(1, 55, SensorUS(IN_4));
+             OnRev(OUT_A, speed); Wait(500);Off(OUT_A);
+             Wait(2000);
+     }
+                         return ;
+
+}
+
+
+task main()
+{
+     ClearScreen();
+     TextOut(0, 60,"How's life doin' ?");
+
+     int angle = 0;
+     SetSensorLowspeed(IN_4);
+     discovery();
+     
+
+}
+
+/*
+TextOut(0, 30, "status:        ");
+      NumOut(72, 30, result);
+      */
