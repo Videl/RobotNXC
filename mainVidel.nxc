@@ -61,9 +61,10 @@ task main()
              }
      }
      //Max Distance and key of the direction
-     writeText("Distance has been choosen !", 10,0);
-     writeNum(keyHighestDistance, 20, 0);
-     writeNum(highestDistance, 30, 0);
+        /* writeText("Distance has been choosen !", 10,0);
+           writeNum(keyHighestDistance, 20, 0);
+           writeNum(highestDistance, 30, 0);   */
+           
      
      
      Wait(2000);
