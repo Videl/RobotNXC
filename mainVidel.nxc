@@ -1,6 +1,6 @@
 #define speed 30
 #define step 50
-#define discoveryTurn 20
+#define discoveryTurn 3 // Test avec 3.
 
 // Ultrasonic IN_4
 // Servomotor A C
@@ -28,15 +28,17 @@ sub discovery() // Discovering the surroundings
 
 sub writeText(string sentence, int line, int column)
 {
-    TextOut(line, 0, "                 ");
-    TextOut(60-line, column, sentence);
+    int lineToUse = 60 - line;
+    TextOut(column, lineToUse, "                 ");
+    TextOut(column, lineToUse, sentence);
     return;
 }
 
 sub writeNum(int number, int line, int column)
 {
-    TextOut(line, 0, "                 ");
-    NumOut(60-line, column, number);
+    int lineToUse = 60 - line;
+    TextOut(column, lineToUse, "                 ");
+    NumOut(column, lineToUse, number);
     return;
 }
 
@@ -44,7 +46,6 @@ task main()
 {
      int keyHighestDistance = 0, highestDistance=1;
      ClearScreen();
-     //TextOut(0, 60,"How's life doin'?");
      writeText("How's life doing", 0, 0);
 
      int angle = 0;
@@ -53,18 +54,21 @@ task main()
      
      for(int i=0; i<discoveryTurn; i++)
      {
-             if(distance[i] > highestDistance)
+             /*if(distance[i] > highestDistance)
              {
                             highestDistance = distance[i];
                             keyHighestDistance = i;
-             }
-             writeText("Choosed distance !", 0,1);
-             writeNum(keyHighestDistance, 1, 2);
-             writeNum(highestDistance, 1, 6);
+             }                             */
+
      }
+     keyHighestDistance = 3;
      //Max Distance and key of the direction
+     writeText("Distance has been choosen !", 10,0);
+     writeNum(keyHighestDistance, 20, 0);
+     writeNum(highestDistance, 30, 0);
      
      
+     Wait(2000);
 
 }
 
