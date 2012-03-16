@@ -14,7 +14,6 @@ sub writeText(string sentence, int line, int column)
 {
     int lineToUse = line;
     CLEARLINE(lineToUse);
-    TextOut(column, lineToUse, "                 ");
     TextOut(column, lineToUse, sentence);
     return;
 }
@@ -68,10 +67,9 @@ task main()
      }
      //Max Distance and key of the direction
      ClearScreen();
-     //writeText("Distance has been choosen !", 15,1);
-     //writeNum(keyHighestDistance, 16, 1);
-     //writeNum(highestDistance, 17, 1);
-     writeText("Yo", LCD_LINE1, 0);
+     writeText("Distance has been choosen !", LCD_LINE1,0);
+     writeNum(keyHighestDistance, LCD_LINE2, 0);
+     writeNum(highestDistance, LCD_LINE3, 0);
            
      
      
