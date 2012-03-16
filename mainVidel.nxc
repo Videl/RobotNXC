@@ -39,6 +39,8 @@ sub writeNum(int number, int line, int column)
     int lineToUse = 60 - line;
     TextOut(column, lineToUse, "                 ");
     NumOut(column, lineToUse, number);
+   // TextOut(line, 0, "                 ");
+   // TextOut(line, column, sentence);
     return;
 }
 
@@ -68,7 +70,6 @@ task main()
      
      
      Wait(2000);
-
 }
 
 
