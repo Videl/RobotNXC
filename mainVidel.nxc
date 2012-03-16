@@ -12,7 +12,7 @@ int distance[discoveryTurn+1];
 
 sub writeText(string sentence, int line, int column)
 {
-    int lineToUse = 60 - line;
+    int lineToUse = line;
     CLEARLINE(lineToUse);
     TextOut(column, lineToUse, "                 ");
     TextOut(column, lineToUse, sentence);
@@ -21,8 +21,7 @@ sub writeText(string sentence, int line, int column)
 
 sub writeNum(int number, int line, int column)
 {
-    int lineToUse = 30 - line;
-    //TextOut(column, lineToUse, "                 ");
+    int lineToUse = line;
     CLEARLINE(lineToUse);
     NumOut(column, lineToUse, number);
     return;
@@ -30,12 +29,12 @@ sub writeNum(int number, int line, int column)
 
 sub discovery() // Discovering the surroundings
 {
-     OnFwd(OUT_A, speed);OnRev(OUT_C, speed); Wait(3000);Off(OUT_AC);
-    // OnFwd(OUT_C, speed); Wait(1000);Off(OUT_C);
+    //OnFwd(OUT_A, speed);OnRev(OUT_C, speed); Wait(3000);Off(OUT_AC);
+    //OnFwd(OUT_C, speed); Wait(1000);Off(OUT_C);
 
      Wait(2000);
 
-     for(int i=1;i <= discoveryTurn;i++)
+     for(int i=3;i <= discoveryTurn;i++)
      {
              distance[i] = SensorUS(IN_4);
              //NumOut(i, 55, SensorUS(IN_4));
@@ -69,9 +68,10 @@ task main()
      }
      //Max Distance and key of the direction
      ClearScreen();
-     writeText("Distance has been choosen !", 15,1);
+     //writeText("Distance has been choosen !", 15,1);
      //writeNum(keyHighestDistance, 16, 1);
      //writeNum(highestDistance, 17, 1);
+     writeText("Yo", LCD_LINE1, 0);
            
      
      
