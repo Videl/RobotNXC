@@ -1,34 +1,19 @@
 #define speed 30
 #define step 50
-#define discoveryTurn 5 // Test avec 3.
+#define discoveryTurn 5
+#define CLEARLINE(L) \
+        TextOut(0, L, "                               ");
               //9:31
-// function to not forget OnFwd(Out_*) et OnRev(Out_*)
+// function to not forget OnFwd(Out_*) et OnRev(Out_*) 3000 ms = 45°
 
 // Ultrasonic IN_4
 // Servomotor A C
-int distance[discoveryTurn];
-
-sub discovery() // Discovering the surroundings
-{
-     OnFwd(OUT_A, speed);OnRev(OUT_C, speed); Wait(10000);Off(OUT_AC);
-    // OnFwd(OUT_C, speed); Wait(1000);Off(OUT_C);
-
-     Wait(2000);
-
-     for(int i=1;i<discoveryTurn;i++)
-     {
-             distance[i] = SensorUS(IN_4);
-             NumOut(i, 55, SensorUS(IN_4));
-             OnRev(OUT_A, speed);OnFwd(OUT_C, speed);Wait(2000);Off(OUT_AC);
-             Wait(2000);
-     }
-
-      return ;
-}
+int distance[discoveryTurn+1];
 
 sub writeText(string sentence, int line, int column)
 {
     int lineToUse = 60 - line;
+    CLEARLINE(lineToUse);
     TextOut(column, lineToUse, "                 ");
     TextOut(column, lineToUse, sentence);
     return;
@@ -36,11 +21,33 @@ sub writeText(string sentence, int line, int column)
 
 sub writeNum(int number, int line, int column)
 {
-    int lineToUse = 60 - line;
-    TextOut(column, lineToUse, "                 ");
+    int lineToUse = 30 - line;
+    //TextOut(column, lineToUse, "                 ");
+    CLEARLINE(lineToUse);
     NumOut(column, lineToUse, number);
     return;
 }
+
+sub discovery() // Discovering the surroundings
+{
+     OnFwd(OUT_A, speed);OnRev(OUT_C, speed); Wait(3000);Off(OUT_AC);
+    // OnFwd(OUT_C, speed); Wait(1000);Off(OUT_C);
+
+     Wait(2000);
+
+     for(int i=1;i <= discoveryTurn;i++)
+     {
+             distance[i] = SensorUS(IN_4);
+             //NumOut(i, 55, SensorUS(IN_4));
+             writeNum(distance[i], i, 0);
+             OnRev(OUT_A, speed);OnFwd(OUT_C, speed);Wait(1200);Off(OUT_AC);
+             Wait(2000);
+     }
+
+      return ;
+}
+
+
 
 task main()
 {
@@ -61,9 +68,10 @@ task main()
              }
      }
      //Max Distance and key of the direction
-         writeText("Distance has been choosen !", 10,1);
-           writeNum(keyHighestDistance, 16, 1);
-           writeNum(highestDistance, 17, 1);
+     ClearScreen();
+     writeText("Distance has been choosen !", 15,1);
+     //writeNum(keyHighestDistance, 16, 1);
+     //writeNum(highestDistance, 17, 1);
            
      
      
