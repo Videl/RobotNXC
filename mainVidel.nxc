@@ -28,12 +28,11 @@ sub writeNum(int number, int line, int column)
 
 sub discovery() // Discovering the surroundings
 {
-    //OnFwd(OUT_A, speed);OnRev(OUT_C, speed); Wait(3000);Off(OUT_AC);
-    //OnFwd(OUT_C, speed); Wait(1000);Off(OUT_C);
+    OnFwd(OUT_A, speed);OnRev(OUT_C, speed); Wait(3000);Off(OUT_AC);
 
      Wait(2000);
 
-     for(int i=3;i <= discoveryTurn;i++)
+     for(int i=1;i <= discoveryTurn;i++)
      {
              distance[i] = SensorUS(IN_4);
              //NumOut(i, 55, SensorUS(IN_4));
@@ -41,6 +40,8 @@ sub discovery() // Discovering the surroundings
              OnRev(OUT_A, speed);OnFwd(OUT_C, speed);Wait(1200);Off(OUT_AC);
              Wait(2000);
      }
+     
+      OnFwd(OUT_A, speed);OnRev(OUT_C, speed); Wait(3000);Off(OUT_AC);
 
       return ;
 }
@@ -70,6 +71,10 @@ task main()
      writeText("Distance has been choosen !", LCD_LINE1,0);
      writeNum(keyHighestDistance, LCD_LINE2, 0);
      writeNum(highestDistance, LCD_LINE3, 0);
+     
+     switch(keyHighestDistance) {
+         case(
+     }
            
      
      
