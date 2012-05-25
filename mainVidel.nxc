@@ -68,7 +68,7 @@ task main()
      SetSensorLowspeed(IN_4);
      discovery();
      
-     for(int i=0; i<discoveryTurn; i++)
+     for(int i=0; i<=discoveryTurn; i++)
      {
              writeNum(distance[i], LCD_LINE5, 13);
              writeNum(i, LCD_LINE6, 17);
@@ -100,15 +100,24 @@ task main()
           Wait(1000);
           writeText("Going there!", LCD_LINE1,0);
           writeText("...", LCD_LINE2,0);
-          if(keyHighestDistance > 0 && keyHighestDistance < 3) {
-               OnFwd(OUT_A, speed);OnRev(OUT_C, speed);Wait(2400*keyHighestDistance);Float(OUT_AC);
+          if(keyHighestDistance == 1) {
+                    OnFwd(OUT_A, speed);OnRev(OUT_C, speed);Wait(2400);Float(OUT_AC);
+                    writeText("key 1", LCD_LINE3,0);
           }
-          else if(keyHighestDistance > 3 && keyHighestDistance < 5) {
-               OnRev(OUT_A, speed);OnFwd(OUT_C, speed);Wait(2400*(keyHighestDistance-2)) ;Float(OUT_AC);
+          if(keyHighestDistance == 2) {
+                    OnFwd(OUT_A, speed);OnRev(OUT_C, speed);Wait(1200);Float(OUT_AC);
+                    writeText("key 2", LCD_LINE4,0);
           }
-          else if(keyHighestDistance == 3) {
+          if(keyHighestDistance == 4) {
+                    OnRev(OUT_A, speed);OnFwd(OUT_C, speed);Wait(1200);Float(OUT_AC);
+                    writeText("key 4", LCD_LINE5,0);
+          }
+          if(keyHighestDistance == 5) {
+                    OnRev(OUT_A, speed);OnFwd(OUT_C, speed);Wait(2400);Float(OUT_AC);
+                    writeText("key 5", LCD_LINE6,0);
+          }
 
-          }
+          Wait(1000);
           writeText("Done!", LCD_LINE4,0);
      }
      
