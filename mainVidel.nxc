@@ -61,6 +61,8 @@ sub discovery() // Discovering the surroundings
 task main()
 {
      int keyHighestDistance = 1, highestDistance=1;
+     int distanceToGoTillNear = 0;
+     
      ClearScreen();
      writeText("How's life doing", LCD_LINE1, 0);
 
@@ -117,8 +119,23 @@ task main()
                     writeText("key 5", LCD_LINE6,0);
           }
 
-          Wait(1000);
-          writeText("Done!", LCD_LINE4,0);
+      Wait(1000);
+      writeText("Done!", LCD_LINE4,0);
+      Wait(1000);
+      ClearScreen();
+      writeText("Going there!", LCD_LINE1,0);
+      
+      distanceToGoTillNear = (highestDistance * 3) / 4;
+      writeNum(distanceToGoTillNear, LCD_LINE2,5);
+      writeText("...", LCD_LINE3,0);
+      
+      OnFwd(OUT_A, speed);OnFwd(OUT_C, speed);
+      while(SensorUS(IN_4)>30);
+      Off (OUT_AC);
+      
+      writeText("Done !", LCD_LINE6,0);
+      Wait(5000);
+          
      }
      
 
