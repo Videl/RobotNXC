@@ -57,91 +57,95 @@ sub discovery() // Discovering the surroundings
 }
 
 
-
 task main()
 {
      int keyHighestDistance = 1, highestDistance=1;
      int distanceToGoTillNear = 0;
-     
-     ClearScreen();
-     writeText("How's life doing", LCD_LINE1, 0);
-
      int angle = 0;
-     SetSensorLowspeed(IN_4);
-     discovery();
-     
-     for(int i=0; i<=discoveryTurn; i++)
-     {
-             writeNum(distance[i], LCD_LINE5, 13);
-             writeNum(i, LCD_LINE6, 17);
-             Wait(1000);
-             if(distance[i] > highestDistance)
-             {
-                    if(distance[i] != 255) {
-                            highestDistance = distance[i];
-                            keyHighestDistance = i;
-                            writeText("Trying out :", LCD_LINE7,0);
-                            writeNum(i, LCD_LINE8, 13);
-                            Wait(1000);
-                    }
-             }
-     }
-     //Max Distance and key of the direction
-     ClearScreen();
-     writeText("Using", LCD_LINE7,0);
-     writeNum(keyHighestDistance, LCD_LINE8, 13);
-     Wait(3000);
-     ClearScreen();
+     while(true) {
+       ClearScreen();
+       writeText("How's life doing", LCD_LINE1, 0);
 
-     
-     if(keyHighestDistance == 0) writeText("Error, stopping", LCD_LINE8, 0);
-     else {
-          writeText("Distance has been choosen !", LCD_LINE1,0);
-          writeNum(keyHighestDistance, LCD_LINE2, 0);
-          writeNum(highestDistance, LCD_LINE3, 3);
-          Wait(1000);
-          writeText("Going there!", LCD_LINE1,0);
-          writeText("...", LCD_LINE2,0);
-          if(keyHighestDistance == 1) {
-                    OnFwd(OUT_A, speed);OnRev(OUT_C, speed);Wait(2400);Float(OUT_AC);
-                    writeText("key 1", LCD_LINE3,0);
-          }
-          if(keyHighestDistance == 2) {
-                    OnFwd(OUT_A, speed);OnRev(OUT_C, speed);Wait(1200);Float(OUT_AC);
-                    writeText("key 2", LCD_LINE4,0);
-          }
-          if(keyHighestDistance == 4) {
-                    OnRev(OUT_A, speed);OnFwd(OUT_C, speed);Wait(1200);Float(OUT_AC);
-                    writeText("key 4", LCD_LINE5,0);
-          }
-          if(keyHighestDistance == 5) {
-                    OnRev(OUT_A, speed);OnFwd(OUT_C, speed);Wait(2400);Float(OUT_AC);
-                    writeText("key 5", LCD_LINE6,0);
-          }
+       SetSensorLowspeed(IN_4);
+       discovery();
 
-      Wait(1000);
-      writeText("Done!", LCD_LINE4,0);
-      Wait(1000);
-      ClearScreen();
-      writeText("Going there!", LCD_LINE1,0);
-      
-      distanceToGoTillNear = (highestDistance * 3) / 4;
-      writeNum(distanceToGoTillNear, LCD_LINE2,5);
-      writeText("...", LCD_LINE3,0);
-      
-      OnFwd(OUT_A, speed);OnFwd(OUT_C, speed);
-      while(SensorUS(IN_4)>30);
-      Off (OUT_AC);
-      
-      writeText("Done !", LCD_LINE6,0);
-      Wait(5000);
-          
-     }
-     
+       for(int i=0; i<=discoveryTurn; i++)
+       {
+               writeNum(distance[i], LCD_LINE5, 13);
+               writeNum(i, LCD_LINE6, 17);
+               Wait(1000);
+               if(distance[i] > highestDistance)
+               {
+                      if(distance[i] != 255) {
+                              highestDistance = distance[i];
+                              keyHighestDistance = i;
+                              writeText("Trying out :", LCD_LINE7,0);
+                              writeNum(i, LCD_LINE8, 13);
+                              Wait(1000);
+                      }
+               }
+       }
+       //Max Distance and key of the direction
+       ClearScreen();
+       writeText("Using", LCD_LINE7,0);
+       writeNum(keyHighestDistance, LCD_LINE8, 13);
+       Wait(3000);
+       ClearScreen();
 
 
-           
-     
-     
-     Wait(5000);
+       if(keyHighestDistance == 0) writeText("Error, stopping", LCD_LINE8, 0);
+       else {
+            writeText("Distance has been choosen !", LCD_LINE1,0);
+            writeNum(keyHighestDistance, LCD_LINE2, 0);
+            writeNum(highestDistance, LCD_LINE3, 3);
+            Wait(1000);
+            writeText("Going there!", LCD_LINE1,0);
+            writeText("...", LCD_LINE2,0);
+            if(keyHighestDistance == 1) {
+                      OnFwd(OUT_A, speed);OnRev(OUT_C, speed);Wait(2400);Float(OUT_AC);
+                      writeText("key 1", LCD_LINE3,0);
+            }
+            if(keyHighestDistance == 2) {
+                      OnFwd(OUT_A, speed);OnRev(OUT_C, speed);Wait(1200);Float(OUT_AC);
+                      writeText("key 2", LCD_LINE4,0);
+            }
+            if(keyHighestDistance == 4) {
+                      OnRev(OUT_A, speed);OnFwd(OUT_C, speed);Wait(1200);Float(OUT_AC);
+                      writeText("key 4", LCD_LINE5,0);
+            }
+            if(keyHighestDistance == 5) {
+                      OnRev(OUT_A, speed);OnFwd(OUT_C, speed);Wait(2400);Float(OUT_AC);
+                      writeText("key 5", LCD_LINE6,0);
+            }
+
+            Wait(1000);
+            writeText("Done!", LCD_LINE4,0);
+            Wait(1000);
+            ClearScreen();
+            writeText("Going there!", LCD_LINE1,0);
+
+            distanceToGoTillNear = (highestDistance * 3) / 4;
+            writeNum(distanceToGoTillNear, LCD_LINE2,5);
+            writeText("...", LCD_LINE3,0);
+
+            OnFwd(OUT_A, speed);OnFwd(OUT_C, speed);
+            while(SensorUS(IN_4)>15) {
+            writeNum(SensorUS(IN_4), LCD_LINE5,5)
+            }
+            Off (OUT_AC);
+
+            writeText("Done !", LCD_LINE6,0);
+            Wait(5000);
+       }
+
+
+        keyHighestDistance = 1;
+        highestDistance = 1;
+        distanceToGoTillNear = 0;
+        for(int i = 0; i < discoveryTurn+1; i++) {
+             distance[i] = 0;
+        }
+        savedRotation = 0;
+      }
+
 }
