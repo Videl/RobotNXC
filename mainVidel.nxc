@@ -147,6 +147,5 @@ task main()
         }
         savedRotation = 0;
       }
-// This is a test for GIT.
 
 }
